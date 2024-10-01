@@ -28,10 +28,11 @@ const Home({ super.key });
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.blue, foregroundColor: Colors.amber,
-        onPressed: ()=> print('Hola'), 
-        child: Icon(Icons.home),
+        onPressed:() => Navigator.pushReplacementNamed(context, '/top'), 
+        child: Icon(Icons.star),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      
     );
   }
 }
