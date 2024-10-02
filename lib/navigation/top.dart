@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TopScree extends StatelessWidget {
-const TopScree({ Key? key }) : super(key: key);
+const TopScree({ super.key });
 
   @override
   Widget build(BuildContext context){
