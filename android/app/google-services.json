@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "733558657443",
+    "project_id": "restaurante10c",
+    "storage_bucket": "restaurante10c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:733558657443:android:a90eadab17028d830eca16",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVNt30TteZTnBYaIB8dJ68ntjW9W0rX_w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

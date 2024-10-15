@@ -1,65 +1,87 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   const Login({super.key});
 
   @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
+  var _isObscure = true;
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Column(
-        children: [
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: CircleAvatar(
-                  backgroundColor: Colors.brown.shade800,
-                  child: const Text('AH'),
+        body: Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('assets/log.png', width: 200, height: 200),
+            const SizedBox(height: 16),
+            TextFormField(
+              decoration: const InputDecoration(
+                  hintText: 'Correo electronico',
+                  label: Text('Correo electronico'),
+                  labelStyle: TextStyle(color: Colors.black)),
+              keyboardType: TextInputType.emailAddress,
+              controller: _email,
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            TextFormField(
+              decoration: InputDecoration(
+                  hintText: 'Contraseña',
+                  label: const Text('Contraseña'),
+                  labelStyle: const TextStyle(color: Colors.black),
+                  suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          _isObscure = !_isObscure;
+                        });
+                      },
+                      icon: Icon(_isObscure
+                          ? Icons.visibility
+                          : Icons.visibility_off))),
+              controller: _password,
+              obscureText: _isObscure,
+            ),
+            const SizedBox(height: 48),
+            SizedBox(
+              width: double.infinity,
+              height: 48,
+              child: ElevatedButton(
+                onPressed: () async {
+                  try {
+                    final credential = await FirebaseAuth.instance
+                        .signInWithEmailAndPassword(
+                            email: _email.text, password: _password.text);
+                  } on FirebaseAuthException catch (e) {
+                    if (e.code == 'user-not-found') {
+                      print('No user found for that email.');
+                    } else if (e.code == 'wrong-password') {
+                      print('Wrong password provided for that user.');
+                    }
+                  }
+                },
+                style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: Colors.blue,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16))),
+                child: const Text(
+                  'Iniciar Sesión',
                 ),
               ),
-              const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Bryan.r0',
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
-                  ),
-                  Text(
-                    textAlign: TextAlign.start,
-                    'hace 10 minutos',
-                    style: TextStyle(color: Colors.black54, fontSize: 12.0),
-                  )
-                ],
-              ),
-              const Expanded(
-                  child: Align(
-                      alignment: Alignment.topRight,
-                      child: Icon(Icons.more_horiz)))
-            ],
-          ),
-          Image.asset(
-            'assets/skeleton.png',
-            width: double.infinity,
-            height: 300,
-          ),
-          const Row(
-            children: [
-              Icon(
-                Icons.favorite,
-                color: Colors.red,
-              ),
-              Icon(Icons.message),
-              Icon(Icons.send),
-              Expanded(
-                  child: Align(
-                      alignment: Alignment.topRight,
-                      child: Icon(Icons.save_alt))),
-            ],
-          )
-        ],
+            )
+          ],
+        ),
       ),
-    );
+    ));
   }
 }
