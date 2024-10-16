@@ -63,10 +63,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ],
             ),
             const Spacer(),
-            ElevatedButton(
+           SizedBox(
+              width: double.infinity,
+              height: 48,
+              child: ElevatedButton(
                 onPressed: () async {
-                 await _signOut();
-                }, child: const Text('Cerrar sessión'))
+                  await _signOut();
+                },
+                style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: const Color.fromARGB(255, 58, 137, 168),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16))),
+                child: const Text(
+                  'Cerrar sesión',
+                ),
+              ),
+            )
           ],
         ),
       ),

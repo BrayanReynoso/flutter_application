@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/kernel/widgets/text_form_field_password.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -34,7 +35,7 @@ class _LoginState extends State<Login> {
             const SizedBox(
               height: 16,
             ),
-            TextFormField(
+            /*TextFormField(
               decoration: InputDecoration(
                   hintText: 'Contraseña',
                   label: const Text('Contraseña'),
@@ -50,8 +51,11 @@ class _LoginState extends State<Login> {
                           : Icons.visibility_off))),
               controller: _password,
               obscureText: _isObscure,
+            ),*/
+            TextFieldPassword(
+              controller: _password,
             ),
-            const SizedBox(height: 48),
+            const SizedBox(height: 16),
             SizedBox(
               width: double.infinity,
               height: 48,
@@ -77,6 +81,17 @@ class _LoginState extends State<Login> {
                 child: const Text(
                   'Iniciar Sesión',
                 ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, '/register');
+              },
+              child: const Text(
+                'Registrarse',
+                style: TextStyle(
+                    color: Colors.blue, decoration: TextDecoration.underline, decorationColor: Colors.blue),
               ),
             )
           ],
